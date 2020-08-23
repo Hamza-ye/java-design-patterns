@@ -1,6 +1,6 @@
-/**
+/*
  * The MIT License
- * Copyright (c) 2014-2016 Ilkka Seppälä
+ * Copyright © 2014-2019 Ilkka Seppälä
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +20,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package com.iluwatar.model.view.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,7 +31,6 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.AppenderBase;
 import java.util.LinkedList;
 import java.util.List;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -61,9 +61,9 @@ public class GiantViewTest {
    */
   @Test
   public void testDisplayGiant() {
-    final GiantView view = new GiantView();
+    final var view = new GiantView();
 
-    final GiantModel model = mock(GiantModel.class);
+    final var model = mock(GiantModel.class);
     view.displayGiant(model);
 
     assertEquals(model.toString(), appender.getLastMessage());
@@ -73,10 +73,10 @@ public class GiantViewTest {
   /**
    * Logging Appender Implementation
    */
-  public class InMemoryAppender extends AppenderBase<ILoggingEvent> {
-    private List<ILoggingEvent> log = new LinkedList<>();
+  public static class InMemoryAppender extends AppenderBase<ILoggingEvent> {
+    private final List<ILoggingEvent> log = new LinkedList<>();
 
-    public InMemoryAppender(Class clazz) {
+    public InMemoryAppender(Class<?> clazz) {
       ((Logger) LoggerFactory.getLogger(clazz)).addAppender(this);
       start();
     }

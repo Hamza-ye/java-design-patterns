@@ -5,9 +5,7 @@ folder: flyweight
 permalink: /patterns/flyweight/
 categories: Structural
 tags:
- - Java
  - Gang Of Four
- - Difficulty-Intermediate
  - Performance
 ---
 
@@ -74,7 +72,7 @@ public class PotionFactory {
   }
 
   Potion createPotion(PotionType type) {
-    Potion potion = potions.get(type);
+    var potion = potions.get(type);
     if (potion == null) {
       switch (type) {
         case HEALING:
@@ -101,7 +99,7 @@ public class PotionFactory {
 And it can be used as below
 
 ```java
-PotionFactory factory = new PotionFactory();
+var factory = new PotionFactory();
 factory.createPotion(PotionType.INVISIBILITY).drink(); // You become invisible. (Potion=6566818)
 factory.createPotion(PotionType.HEALING).drink(); // You feel healed. (Potion=648129364)
 factory.createPotion(PotionType.INVISIBILITY).drink(); // You become invisible. (Potion=6566818)
@@ -109,6 +107,9 @@ factory.createPotion(PotionType.HOLY_WATER).drink(); // You feel blessed. (Potio
 factory.createPotion(PotionType.HOLY_WATER).drink(); // You feel blessed. (Potion=1104106489)
 factory.createPotion(PotionType.HEALING).drink(); // You feel healed. (Potion=648129364)
 ```
+
+## Class diagram
+![alt text](./etc/flyweight.urm.png "Flyweight pattern class diagram")
 
 ## Applicability
 The Flyweight pattern's effectiveness depends heavily on how
@@ -127,4 +128,5 @@ true
 
 ## Credits
 
-* [Design Patterns: Elements of Reusable Object-Oriented Software](http://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612)
+* [Design Patterns: Elements of Reusable Object-Oriented Software](https://www.amazon.com/gp/product/0201633612/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0201633612&linkCode=as2&tag=javadesignpat-20&linkId=675d49790ce11db99d90bde47f1aeb59)
+* [Head First Design Patterns: A Brain-Friendly Guide](https://www.amazon.com/gp/product/0596007124/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0596007124&linkCode=as2&tag=javadesignpat-20&linkId=6b8b6eea86021af6c8e3cd3fc382cb5b)

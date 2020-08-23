@@ -1,6 +1,6 @@
-/**
+/*
  * The MIT License
- * Copyright (c) 2014-2016 Ilkka Seppälä
+ * Copyright © 2014-2019 Ilkka Seppälä
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,24 +20,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package com.iluwatar.image.microservice;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
+import org.slf4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+
 /**
- * Exposes the Image microservice's endpoints
+ * Exposes the Image microservice's endpoints.
  */
 @RestController
 public class ImageController {
+  private static final Logger LOGGER = getLogger(ImageController.class);
 
   /**
-   * An endpoint for a user to retrieve an image path
+   * An endpoint for a user to retrieve an image path.
+   *
    * @return An image path
    */
   @RequestMapping(value = "/image-path", method = RequestMethod.GET)
   public String getImagePath() {
+    LOGGER.info("Successfully found image path");
     return "/product-image.png";
   }
 }

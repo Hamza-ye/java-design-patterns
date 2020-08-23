@@ -5,9 +5,8 @@ folder: proxy
 permalink: /patterns/proxy/
 categories: Structural
 tags:
- - Java
  - Gang Of Four
- - Difficulty-Beginner
+ - Decoupling
 ---
 
 ## Also known as
@@ -101,13 +100,16 @@ public class WizardTowerProxy implements WizardTower {
 And here is tower entering scenario
 
 ```java
-WizardTowerProxy proxy = new WizardTowerProxy(new IvoryTower());
+var proxy = new WizardTowerProxy(new IvoryTower());
 proxy.enter(new Wizard("Red wizard")); // Red wizard enters the tower.
 proxy.enter(new Wizard("White wizard")); // White wizard enters the tower.
 proxy.enter(new Wizard("Black wizard")); // Black wizard enters the tower.
 proxy.enter(new Wizard("Green wizard")); // Green wizard is not allowed to enter!
 proxy.enter(new Wizard("Brown wizard")); // Brown wizard is not allowed to enter!
 ```
+
+## Class diagram
+![alt text](./etc/proxy.urm.png "Proxy pattern class diagram")
 
 ## Applicability
 Proxy is applicable whenever there is a need for a more
@@ -127,17 +129,20 @@ are several common situations in which the Proxy pattern is applicable
 * Count references to an object
 
 ## Tutorials
+
 * [Controlling Access With Proxy Pattern](http://java-design-patterns.com/blog/controlling-access-with-proxy-pattern/)
 
-## Presentations
-* [Proxy](https://github.com/iluwatar/java-design-patterns/tree/master/proxy/etc/presentation.html)
-
-## Real world examples
+## Known uses
 
 * [java.lang.reflect.Proxy](http://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Proxy.html)
 * [Apache Commons Proxy](https://commons.apache.org/proper/commons-proxy/)
 * Mocking frameworks Mockito, Powermock, EasyMock
 
+## Related patterns
+
+* [Ambassador](https://java-design-patterns.com/patterns/ambassador/)
+
 ## Credits
 
-* [Design Patterns: Elements of Reusable Object-Oriented Software](http://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612)
+* [Design Patterns: Elements of Reusable Object-Oriented Software](https://www.amazon.com/gp/product/0201633612/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0201633612&linkCode=as2&tag=javadesignpat-20&linkId=675d49790ce11db99d90bde47f1aeb59)
+* [Head First Design Patterns: A Brain-Friendly Guide](https://www.amazon.com/gp/product/0596007124/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0596007124&linkCode=as2&tag=javadesignpat-20&linkId=6b8b6eea86021af6c8e3cd3fc382cb5b)

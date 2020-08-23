@@ -1,6 +1,6 @@
-/**
+/*
  * The MIT License
- * Copyright (c) 2014-2016 Ilkka Seppälä
+ * Copyright © 2014-2019 Ilkka Seppälä
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +20,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package com.iluwatar.observer.generic;
 
 import com.iluwatar.observer.WeatherType;
@@ -78,7 +79,7 @@ public abstract class ObserverTest<O extends Observer<?, ?, WeatherType>> {
   @ParameterizedTest
   @MethodSource("dataProvider")
   public void testObserver(WeatherType weather, String response) {
-    final O observer = this.factory.get();
+    final var observer = this.factory.get();
     assertEquals(0, appender.getLogSize());
 
     observer.update(null, weather);

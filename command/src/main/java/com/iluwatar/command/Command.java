@@ -1,6 +1,6 @@
-/**
+/*
  * The MIT License
- * Copyright (c) 2014-2016 Ilkka Seppälä
+ * Copyright © 2014-2019 Ilkka Seppälä
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,22 +20,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package com.iluwatar.command;
 
 /**
- * 
  * Interface for Commands.
- * 
  */
-public abstract class Command {
+public interface Command {
+  void execute(Target target);
 
-  public abstract void execute(Target target);
+  void undo();
 
-  public abstract void undo();
+  void redo();
 
-  public abstract void redo();
-
-  @Override
-  public abstract String toString();
-
+  String toString();
 }

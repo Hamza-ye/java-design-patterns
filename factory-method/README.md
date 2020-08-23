@@ -5,8 +5,7 @@ folder: factory-method
 permalink: /patterns/factory-method/
 categories: Creational
 tags:
- - Java
- - Difficulty-Beginner
+ - Extensibility
  - Gang Of Four
 ---
 
@@ -42,13 +41,13 @@ public interface Blacksmith {
 
 public class ElfBlacksmith implements Blacksmith {
   public Weapon manufactureWeapon(WeaponType weaponType) {
-    return new ElfWeapon(weaponType);
+    return ELFARSENAL.get(weaponType);
   }
 }
 
 public class OrcBlacksmith implements Blacksmith {
   public Weapon manufactureWeapon(WeaponType weaponType) {
-    return new OrcWeapon(weaponType);
+    return ORCARSENAL.get(weaponType);
   }
 }
 ```
@@ -56,11 +55,14 @@ public class OrcBlacksmith implements Blacksmith {
 Now as the customers come the correct type of blacksmith is summoned and requested weapons are manufactured
 
 ```java
-Blacksmith blacksmith = new ElfBlacksmith();
+var blacksmith = new ElfBlacksmith();
 blacksmith.manufactureWeapon(WeaponType.SPEAR);
 blacksmith.manufactureWeapon(WeaponType.AXE);
 // Elvish weapons are created
 ```
+
+## Class diagram
+![alt text](./etc/factory-method.urm.png "Factory Method pattern class diagram")
 
 ## Applicability
 Use the Factory Method pattern when
@@ -68,10 +70,6 @@ Use the Factory Method pattern when
 * a class can't anticipate the class of objects it must create
 * a class wants its subclasses to specify the objects it creates
 * classes delegate responsibility to one of several helper subclasses, and you want to localize the knowledge of which helper subclass is the delegate
-
-## Presentations
-
-* [Factory Method Pattern](etc/presentation.html) 
 
 ## Real world examples
 
@@ -85,4 +83,6 @@ Use the Factory Method pattern when
 
 ## Credits
 
-* [Design Patterns: Elements of Reusable Object-Oriented Software](http://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612)
+* [Design Patterns: Elements of Reusable Object-Oriented Software](https://www.amazon.com/gp/product/0201633612/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0201633612&linkCode=as2&tag=javadesignpat-20&linkId=675d49790ce11db99d90bde47f1aeb59)
+* [Head First Design Patterns: A Brain-Friendly Guide](https://www.amazon.com/gp/product/0596007124/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0596007124&linkCode=as2&tag=javadesignpat-20&linkId=6b8b6eea86021af6c8e3cd3fc382cb5b)
+* [Refactoring to Patterns](https://www.amazon.com/gp/product/0321213351/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0321213351&linkCode=as2&tag=javadesignpat-20&linkId=2a76fcb387234bc71b1c61150b3cc3a7)

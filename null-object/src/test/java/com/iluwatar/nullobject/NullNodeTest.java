@@ -1,6 +1,6 @@
-/**
+/*
  * The MIT License
- * Copyright (c) 2014-2016 Ilkka Seppälä
+ * Copyright © 2014-2019 Ilkka Seppälä
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +20,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package com.iluwatar.nullobject;
 
 import org.junit.jupiter.api.Test;
@@ -34,30 +35,29 @@ import static org.junit.jupiter.api.Assertions.assertSame;
  *
  * @author Jeroen Meulemeester
  */
-public class NullNodeTest {
+class NullNodeTest {
 
   /**
    * Verify if {@link NullNode#getInstance()} actually returns the same object instance
    */
   @Test
-  public void testGetInstance() {
-    final NullNode instance = NullNode.getInstance();
+  void testGetInstance() {
+    final var instance = NullNode.getInstance();
     assertNotNull(instance);
     assertSame(instance, NullNode.getInstance());
   }
 
   @Test
-  public void testFields() {
-    final NullNode node = NullNode.getInstance();
+  void testFields() {
+    final var node = NullNode.getInstance();
     assertEquals(0, node.getTreeSize());
     assertNull(node.getName());
     assertNull(node.getLeft());
     assertNull(node.getRight());
   }
 
-  @Test
-  public void testWalk() {
-    NullNode.getInstance().walk();
-  }
+  /**
+   * Removed unnecessary test method for {@link NullNode#walk()} as the method doesn't have an implementation.
+   */
 
 }

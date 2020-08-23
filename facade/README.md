@@ -5,9 +5,8 @@ folder: facade
 permalink: /patterns/facade/
 categories: Structural
 tags:
- - Java
  - Gang Of Four
- - Difficulty-Beginner
+ - Decoupling
 ---
 
 ## Intent
@@ -77,16 +76,14 @@ public abstract class DwarvenMineWorker {
   }
 
   public void action(Action... actions) {
-    for (Action action : actions) {
-      action(action);
-    }
+    Arrays.stream(actions).forEach(this::action);
   }
 
   public abstract void work();
 
   public abstract String name();
 
-  static enum Action {
+  enum Action {
     GO_TO_SLEEP, WAKE_UP, GO_HOME, GO_TO_MINE, WORK
   }
 }
@@ -146,10 +143,10 @@ public class DwarvenGoldmineFacade {
   private final List<DwarvenMineWorker> workers;
 
   public DwarvenGoldmineFacade() {
-    workers = new ArrayList<>();
-    workers.add(new DwarvenGoldDigger());
-    workers.add(new DwarvenCartOperator());
-    workers.add(new DwarvenTunnelDigger());
+      workers = List.of(
+            new DwarvenGoldDigger(),
+            new DwarvenCartOperator(),
+            new DwarvenTunnelDigger());
   }
 
   public void startNewDay() {
@@ -166,9 +163,7 @@ public class DwarvenGoldmineFacade {
 
   private static void makeActions(Collection<DwarvenMineWorker> workers,
       DwarvenMineWorker.Action... actions) {
-    for (DwarvenMineWorker worker : workers) {
-      worker.action(actions);
-    }
+    workers.forEach(worker -> worker.action(actions));
   }
 }
 ```
@@ -197,6 +192,9 @@ facade.endDay();
 // Dwarven tunnel digger goes to sleep.
 ```
 
+## Class diagram
+![alt text](./etc/facade.urm.png "Facade pattern class diagram")
+
 ## Applicability
 Use the Facade pattern when
 
@@ -206,4 +204,5 @@ Use the Facade pattern when
 
 ## Credits
 
-* [Design Patterns: Elements of Reusable Object-Oriented Software](http://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612)
+* [Design Patterns: Elements of Reusable Object-Oriented Software](https://www.amazon.com/gp/product/0201633612/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0201633612&linkCode=as2&tag=javadesignpat-20&linkId=675d49790ce11db99d90bde47f1aeb59)
+* [Head First Design Patterns: A Brain-Friendly Guide](https://www.amazon.com/gp/product/0596007124/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0596007124&linkCode=as2&tag=javadesignpat-20&linkId=6b8b6eea86021af6c8e3cd3fc382cb5b)
