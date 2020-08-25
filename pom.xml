@@ -195,6 +195,7 @@
         <module>arrange-act-assert</module>
         <module>transaction-script</module>
         <module>filterer</module>
+      <module>bridge-examples</module>
     </modules>
 
     <repositories>
