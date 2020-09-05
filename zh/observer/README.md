@@ -10,35 +10,31 @@ tags:
 ---
 
 ## Also known as
+## 又被称为
 
-Dependents, Publish-Subscribe
+家属，发布订阅模式
 
-## Intent
+## 目的
 
-Define a one-to-many dependency between objects so that when one object changes state, all its 
-dependents are notified and updated automatically.
+定义一种一对多的对象依赖关系这样当一个对象改变状态时，所有依赖它的对象都将自动通知或更新。
 
-## Explanation
+## 解释
 
-Real world example
+真实世界例子
 
-> In a land far away lives the races of hobbits and orcs. Both of them are mostly outdoors so they 
-> closely follow the changes in weather. One could say that they are constantly observing the 
-> weather.
+> 在遥远的土地上生活着霍比特人和兽人的种族。他们都是户外生活的人所以他们密切关注天气的变化。可以说他们不断地关注着天气。
 
-In plain words
+通俗的说
 
-> Register as an observer to receive state changes in the object.
+> 注册成为一个观察者以接收对象状态的改变。
 
-Wikipedia says
+维基百科说
 
-> The observer pattern is a software design pattern in which an object, called the subject, 
-> maintains a list of its dependents, called observers, and notifies them automatically of any state 
-> changes, usually by calling one of their methods.
+> 观察者模式是这样的一种软件设计模式：它有一个被称为主题的对象，维护着一个所有依赖于它的依赖者清单，也就是观察者清单，当主题的状态发生改变时，主题通常会调用观察者的方法来自动通知观察者们。
 
-**Programmatic Example**
+**编程示例**
 
-Let's first introduce the `WeatherObserver` interface and our races, `Orcs` and `Hobbits`.
+让我们先来介绍天气观察者的接口以及我们的种族，兽人和霍比特人。
 
 ```java
 public interface WeatherObserver {
@@ -64,12 +60,11 @@ public class Hobbits implements WeatherObserver {
   public void update(WeatherType currentWeather) {
     switch (currentWeather) {
       LOGGER.info("The hobbits are facing " + currentWeather.getDescription() + " weather now");
-    }
   }
 }
 ```
 
-Then here's the `Weather` that is constantly changing.
+然后这里是不断变化的天气。
 
 ```java
 public class Weather {
@@ -110,62 +105,53 @@ public class Weather {
 }
 ```
 
-Here's the full example in action.
+这是完整的示例。
 
 ```java
     var weather = new Weather();
     weather.addObserver(new Orcs());
     weather.addObserver(new Hobbits());
-    weather.timePasses();
-    weather.timePasses();
-    weather.timePasses();
-    weather.timePasses();
-```
 
-Program output:
-
-```
-The weather changed to rainy.
-The orcs are facing rainy weather now
-The hobbits are facing rainy weather now
-The weather changed to windy.
-The orcs are facing windy weather now
-The hobbits are facing windy weather now
-The weather changed to cold.
-The orcs are facing cold weather now
-The hobbits are facing cold weather now
-The weather changed to sunny.
-The orcs are facing sunny weather now
-The hobbits are facing sunny weather now
+    weather.timePasses();
+    // The weather changed to rainy.
+    // The orcs are facing rainy weather now
+    // The hobbits are facing rainy weather now
+    weather.timePasses();
+    // The weather changed to windy.
+    // The orcs are facing windy weather now
+    // The hobbits are facing windy weather now
+    weather.timePasses();
+    // The weather changed to cold.
+    // The orcs are facing cold weather now
+    // The hobbits are facing cold weather now
+    weather.timePasses();
+    // The weather changed to sunny.
+    // The orcs are facing sunny weather now
+    // The hobbits are facing sunny weather now
 ```
 
 ## Class diagram
+![alt text](../../observer/etc/observer.png "Observer")
 
-![alt text](./etc/observer.png "Observer")
+## 应用
+在下面任何一种情况下都可以使用观察者模式
 
-## Applicability
+* 当抽象具有两个方面时，一个方面依赖于另一个方面。将这些方面封装在单独的对象中，可以使你分别进行更改和重用
+* 当一个对象的改变的同时需要改变其他对象，同时你又不知道有多少对象需要改变时
+* 当一个对象可以通知其他对象而无需假设这些对象是谁时。换句话说，你不想让这些对象紧耦合。
 
-Use the Observer pattern in any of the following situations:
+## 典型用例
 
-* When an abstraction has two aspects, one dependent on the other. Encapsulating these aspects in 
-separate objects lets you vary and reuse them independently.
-* When a change to one object requires changing others, and you don't know how many objects need to 
-be changed.
-* When an object should be able to notify other objects without making assumptions about who these 
-objects are. In other words, you don't want these objects tightly coupled.
+* 一个对象的改变导致其他对象的改变
 
-## Typical Use Case
-
-* Changing in one object leads to a change in other objects.
-
-## Real world examples
+## Java中的例子
 
 * [java.util.Observer](http://docs.oracle.com/javase/8/docs/api/java/util/Observer.html)
 * [java.util.EventListener](http://docs.oracle.com/javase/8/docs/api/java/util/EventListener.html)
 * [javax.servlet.http.HttpSessionBindingListener](http://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpSessionBindingListener.html)
 * [RxJava](https://github.com/ReactiveX/RxJava)
 
-## Credits
+## 鸣谢
 
 * [Design Patterns: Elements of Reusable Object-Oriented Software](https://www.amazon.com/gp/product/0201633612/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0201633612&linkCode=as2&tag=javadesignpat-20&linkId=675d49790ce11db99d90bde47f1aeb59)
 * [Java Generics and Collections](https://www.amazon.com/gp/product/0596527756/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0596527756&linkCode=as2&tag=javadesignpat-20&linkId=246e5e2c26fe1c3ada6a70b15afcb195)
